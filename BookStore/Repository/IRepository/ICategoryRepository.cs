@@ -8,6 +8,6 @@ namespace BookStore.Repository.IRepository
 {
     public interface ICategoryRepository : IRepository<Category>
     {
-        void Update(Category);
+        void Update(Category category);
     }
 }
