@@ -47,19 +47,10 @@ namespace BookStore.Areas.Admin.Controllers
             return View(coverType);
         }
 
-
-        #region API_CALLS
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var allObj = _unitOfWork.CoverType.GetAll();
-            return Json(new { data = allObj });
-        }
-
         [HttpPost]
         public IActionResult Upsert(CoverType coverType)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 if (coverType.Id == 0)
                 {
@@ -76,6 +67,15 @@ namespace BookStore.Areas.Admin.Controllers
             }
 
             return View(coverType);
+        }
+
+
+        #region API_CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var allObj = _unitOfWork.CoverType.GetAll();
+            return Json(new { data = allObj });
         }
 
         [HttpDelete]
