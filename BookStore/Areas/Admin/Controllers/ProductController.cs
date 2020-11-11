@@ -163,7 +163,7 @@ namespace BookStore.Areas.Admin.Controllers
             _unitOfWork.Product.Remove(objFromDb);
             _unitOfWork.Save();
 
-            return Json(new { success = true, message = "Delete successful" });
+            return Json(new { success = true, message = "Delete successfully" });
         }
 
 
