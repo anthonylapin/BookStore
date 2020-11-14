@@ -48,7 +48,7 @@ namespace BookStore.Areas.Customer.Controllers
         public IActionResult Details(int id)
         {
             var productFromDb = _unitOfWork.Product
-                .GetFirstOrDefault(p => p.Id == id, inlcudeProperties:"Category,CoverType");
+                .GetFirstOrDefault(p => p.Id == id, includeProperties:"Category,CoverType");
 
             if(productFromDb == null)
             {
@@ -81,7 +81,7 @@ namespace BookStore.Areas.Customer.Controllers
                 var cartFromDb = _unitOfWork.ShoppingCart
                     .GetFirstOrDefault(
                         u => u.ApplicationUserId == cartObject.ApplicationUserId && u.ProductId == cartObject.ProductId,
-                        inlcudeProperties: "Product"
+                        includeProperties: "Product"
                     );
 
                 if(cartFromDb == null)
@@ -107,7 +107,7 @@ namespace BookStore.Areas.Customer.Controllers
             }
 
             var productFromDb = _unitOfWork.Product
-               .GetFirstOrDefault(p => p.Id == cartObject.ProductId, inlcudeProperties: "Category,CoverType");
+               .GetFirstOrDefault(p => p.Id == cartObject.ProductId, includeProperties: "Category,CoverType");
 
             if (productFromDb == null)
             {

@@ -18,7 +18,7 @@ namespace BookStore.Repository.IRepository
 
         T GetFirstOrDefault(
             Expression<Func<T, bool>> filter = null,
-            string inlcudeProperties = null
+            string includeProperties = null
             );
 
         void Add(T entity);
