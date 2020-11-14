@@ -36,7 +36,6 @@ namespace BookStore
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -55,6 +54,12 @@ namespace BookStore
             {
                 options.ClientId = "580928498427-9df8ajhsd8js08sfo09u19c7aifg6hi8.apps.googleusercontent.com";
                 options.ClientSecret = "mrVb6798Dajwg8_kTj3KZNHz";
+            });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
         }
 
@@ -76,9 +81,12 @@ namespace BookStore
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+        
 
             app.UseEndpoints(endpoints =>
             {
