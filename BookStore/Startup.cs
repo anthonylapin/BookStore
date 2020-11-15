@@ -16,6 +16,7 @@ using BookStore.Repository.IRepository;
 using BookStore.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using BookStore.Utility;
+using Stripe;
 
 namespace BookStore
 {
@@ -36,6 +37,7 @@ namespace BookStore
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -86,7 +88,7 @@ namespace BookStore
             app.UseAuthentication();
             app.UseAuthorization();
 
-        
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
 
             app.UseEndpoints(endpoints =>
             {
