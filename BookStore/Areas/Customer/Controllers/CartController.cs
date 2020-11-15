@@ -165,8 +165,6 @@ namespace BookStore.Areas.Customer.Controllers
             _unitOfWork.OrderHeader.Add(ShoppingCartViewModel.OrderHeader);
             _unitOfWork.Save();
 
-            var orderDetailsList = new List<OrderDetails>();
-
             foreach(var item in ShoppingCartViewModel.ListCart)
             {
                 item.Price = SD.GetPriceBasedOnQuantity(item.Count, item.Product.Price, item.Product.Price50, item.Product.Price100);
